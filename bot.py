@@ -1,13 +1,26 @@
+from telegram import Update
+from telegram.ext import Updater, CommandHandler, CallbackContext
 
-           f"👧 Ребёнок: {data['child_name']}, {data['child_age']} лет\n"            f"📞 Контакт: {data['contact']}\n"            f"🏅 Опыт: {data.get('has_experience', 'Нет')}\n"            f"📝 Вид спорта: {data.get('sport_experience', '—')}"
+# Токен, который ты получил от BotFather
+API_TOKEN = 8005566639:AAHgfTudSiSR-v7I2DI7PYQ1ZAoyxy3cJjA
 
-    await bot.send_message(trainer_username, info)
-    await message.answer("Спасибо! Ваша заявка отправлена ✅", reply_markup=main_kb)
-    await state.finish()
+# Функция для команды /start
+def start(update: Update, context: CallbackContext) -> None:
+    update.message.reply_text('Привет! Я твой бот.')
 
-@dp.message_handler(lambda m: m.text == "📩 Связаться с руководством")
-async def contact_admin(message: types.Message):
-    await message.answer("Вы можете написать руководству сюда: @bobryshevv")
+def main():
+    # Создаём объект Updater с твоим токеном
+    updater = Updater(API_TOKEN, use_context=True)
+
+    # Получаем диспетчер для добавления обработчиков
+    dispatcher = updater.dispatcher
+
+    # Добавляем обработчик для команды /start
+    dispatcher.add_handler(CommandHandler("start", start))
+
+    # Запускаем бота
+    updater.start_polling()
+    updater.idle()
 
 if __name__ == '__main__':
-    executor.start_polling(dp, skip_updates=True)
+    main()
