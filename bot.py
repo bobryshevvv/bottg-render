@@ -1,8 +1,15 @@
 import os
 import telebot
 
-BOT_TOKEN = os.environ.get("BOT_TOKEN")
+# Получаем токен из переменной окружения
+BOT_TOKEN = os.getenv('BOT_TOKEN')
 bot = telebot.TeleBot(BOT_TOKEN)
+
+# Убираем Webhook
+bot.remove_webhook()
+
+# Запускаем polling
+bot.polling(none_stop=True)
 
 @bot.message_handler(commands=["start"])
 def send_welcome(message):
