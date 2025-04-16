@@ -2,7 +2,7 @@ from telegram import Update, ReplyKeyboardMarkup
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
 import os
 
-TOKEN = os.environ.get(8005566639:AAHgfTudSiSR-v7I2DI7PYQ1ZAoyxy3cJjA)
+TOKEN = os.environ.get("BOT_TOKEN")
 
 menu_keyboard = [["Записаться", "Частые вопросы"]]
 markup = ReplyKeyboardMarkup(menu_keyboard, resize_keyboard=True)
